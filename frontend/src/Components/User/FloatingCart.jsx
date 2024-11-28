@@ -57,7 +57,7 @@ const FloatingCart = ({ hideCartButton }) => {
 
   return (
     <div className="floating-cart" ref={floatingCartRef}>
-      <Button variant="primary" onClick={handleCartClick} className="floating-cart-button">
+      <Button variant="success" onClick={handleCartClick} className="floating-cart-button">
         <Cart4 size={30} />
         {cart && cart.items.length > 0 && <span className="cart-item-count">{cart.items.length}</span>}
       </Button>
@@ -77,14 +77,14 @@ const FloatingCart = ({ hideCartButton }) => {
                         <span>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(item.product.price)}</span>
                       </p>
                       <div className="cart-item-actions">
-                        <Button variant="link" onClick={() => handleQuantityChange(item.product._id, item.quantity - 1)}>
+                        <Button variant="link text-success" onClick={() => handleQuantityChange(item.product._id, item.quantity - 1)}>
                           <Dash />
                         </Button>
                         <span className="mx-2">{item.quantity}</span>
-                        <Button variant="link" onClick={() => handleQuantityChange(item.product._id, item.quantity + 1)}>
+                        <Button variant="link text-success" onClick={() => handleQuantityChange(item.product._id, item.quantity + 1)}>
                           <Plus />
                         </Button>
-                        <Button variant="link" onClick={() => handleRemoveItem(item.product._id)} className="ml-3">
+                        <Button variant="link text-success" onClick={() => handleRemoveItem(item.product._id)} className="ml-3">
                           <Trash />
                         </Button>
                       </div>

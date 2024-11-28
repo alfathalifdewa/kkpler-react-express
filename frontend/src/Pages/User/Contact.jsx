@@ -31,16 +31,17 @@ const Contact = () => {
       >
         <Container>
           <Row>
-            <Col xs={12} md={10} lg={8}>
-              <h3 className="fs-4 mb-3 text-secondary text-uppercase">
+          <h3 className="fs-4 mb-5 mt-3 text-secondary text-uppercase text-center animate__animated animate__bounceInRight">
                 Kontak Kami
               </h3>
+            <Col xs={12} md={10} lg={8}>
+              
             </Col>
           </Row>
         </Container>
 
         <Container>
-          <Row className="gy-4 gy-md-5 gy-lg-0 align-items-md-center">
+          <Row className="gy-4 gy-md-5 gy-lg-0 align-items-md-center mt-3">
             <Col xs={12} lg={6}>
               <div className="bg-accent shadow border-0 overflow-hidden">
                 <Form onSubmit={handleSubmit}>
@@ -97,7 +98,7 @@ const Contact = () => {
                     </Col>
                     <Col xs={12}>
                       <div className="d-grid">
-                        <Button variant="primary" size="lg" type="submit">
+                        <Button variant="success" size="lg" type="submit">
                           Kirim Pesan
                         </Button>
                       </div>
@@ -111,7 +112,7 @@ const Contact = () => {
               <Row className="justify-content-xl-center">
                 <Col xs={12} xl={11}>
                   <div className="mb-4 mb-md-5">
-                    <div className="mb-3 text-primary">
+                    <div className="mb-3 text-success">
                       <Geo size={32} />
                     </div>
                     <div>
@@ -125,7 +126,7 @@ const Contact = () => {
                   <div className="row mb-sm-4 mb-md-5">
                     <Col xs={12} sm={6}>
                       <div className="mb-4 mb-sm-0">
-                        <div className="mb-3 text-primary">
+                        <div className="mb-3 text-success">
                           <TelephoneOutbound size={32} />
                         </div>
                         <div>
@@ -139,21 +140,21 @@ const Contact = () => {
                     </Col>
                     <Col xs={12} sm={6}>
                       <div>
-                        <div className="mb-3 text-primary">
+                        <div className="mb-3 text-success">
                           <Envelope size={32} />
                         </div>
                         <div>
                           <h4 className="mb-2">Email</h4>
                           <hr className="w-50 my-3 border-dark-subtle" />
                           <p className="mb-0 text-secondary">
-                            pharmora.id@help.com
+                            sayurku.id@help.com
                           </p>
                         </div>
                       </div>
                     </Col>
                   </div>
                   <div>
-                    <div className="mb-3 text-primary">
+                    <div className="mb-3 text-success">
                       <ClockHistory size={32} />
                     </div>
                     <div>

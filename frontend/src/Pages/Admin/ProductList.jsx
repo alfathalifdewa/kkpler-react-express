@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
 import api from '../../api';
-import HeaderDashboard from '../../Components/Admin/HeaderDashboard';
+import Sidebar from '../../Components/Admin/Sidebar';
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -185,11 +186,11 @@ const ProductList = () => {
 
   return (
     <>
-      <HeaderDashboard />
+      <Sidebar />
       <Container>
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Product List</h3>
-          <Button variant="primary" onClick={() => handleShowModal(null)}>
+          <Button variant="success" onClick={() => handleShowModal(null)}>
             Tambah Data
           </Button>
         </div>
@@ -222,7 +223,7 @@ const ProductList = () => {
                   <td>{formatIDR(product.price)}</td>
                   <td>{product.nie || 'N/A'}</td>
                   <td>
-                    <Button variant="info" size="sm" onClick={() => handleShowModal(product)}>
+                    <Button variant="outline-success" size="sm" onClick={() => handleShowModal(product)}>
                       View Detail
                     </Button>
                   </td>
@@ -396,6 +397,7 @@ const ProductList = () => {
                 </Form.Group>
               </Col>
             </Row>
+            <div className='d-flex gap-3'>
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
             </Button>
@@ -407,6 +409,7 @@ const ProductList = () => {
                 Delete
               </Button>
             )}
+            </div>
           </Form>
         </Modal.Body>
       </Modal>

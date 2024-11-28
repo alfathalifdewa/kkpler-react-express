@@ -39,20 +39,19 @@ const Product = () => {
       <Container className="product-container">
         <Row className="product-box justify-content-center mb-3">
           <Row className="align-items-center justify-content-between">
-            <Col>
-              <h5>Product List</h5>
+            <Col className="mb-5">
+              <h3 className="text-center text-secondary text-uppercase animate__animated animate__bounceInLeft">Product List</h3>
             </Col>
           </Row>
-          <Col xs={12}>
-            <Row className="g-3 justify-content-center">
+          <Col xs={12} data-aos="fade-up" data-aos-duration="1000">
+            <Row className="g-3">
               {products.map((item, index) => (
                 <Col
                   xs={12}
                   sm={6}
                   md={4}
-                  lg={2}
                   key={index}
-                  className="d-flex justify-content-center"
+                  className=""
                 >
                   <Card
                     className="product-card h-100 border-0 shadow"
@@ -70,7 +69,7 @@ const Product = () => {
                       <Card.Text className="product-price">
                         {formatIDR(item.price)}
                       </Card.Text>
-                      <Button variant="outline-primary" className="pe-3 ps-3">
+                      <Button variant="outline-success" className="pe-3 ps-3 w-100">
                         Detail
                       </Button>
                     </Card.Body>

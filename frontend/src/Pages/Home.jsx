@@ -175,7 +175,7 @@ const Home = () => {
           <Col xs={12}>
             <Row className="align-items-center justify-content-between">
               <Col>
-                <h5>Kategori</h5>
+                <h5 className="text-center">Kategori</h5>
               </Col>
               <Col xs="auto">
                 <Button

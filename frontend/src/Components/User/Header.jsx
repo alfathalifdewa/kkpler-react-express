@@ -8,39 +8,37 @@ import {
   Offcanvas,
   Dropdown,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/img/logo.png";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import logo from "../../assets/img/logo1.jpeg";
 import "../../assets/css/Header.css";
 
 const Header = () => {
   const [authToken, setAuthToken] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation(); // Gunakan untuk mendapatkan path saat ini
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     setAuthToken(token);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     setAuthToken(null);
-    navigate('/logout');
+    navigate("/logout");
   };
 
   return (
     <>
-      <Navbar expand="lg" className="mb-3 navbar-container" sticky="top">
+      <Navbar expand="lg" className="navbar-container" sticky="top">
         <Container fluid className="left-container">
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
             <img
               src={logo}
               alt="Logo"
-              height="50"
-              className="d-inline-block align-center me-3"
+              height="65"
+              className="d-inline-block align-center me-3 animate__animated animate__bounce"
             />
-            <h1 className="fw-bold">
-              Pharmora<span>.id</span>
-            </h1>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbarLabel-expand-lg`} />
           <Navbar.Offcanvas
@@ -60,35 +58,60 @@ const Header = () => {
                   height="40"
                   className="d-inline-block align-top me-3"
                 />
-                <h3 className="fw-bold">
-                  Pharmora<span>.id</span>
-                </h3>
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-center flex-grow-1 pe-3">
-                <Nav.Link as={Link} to="/">
+                <Nav.Link
+                  as={Link}
+                  to="/"
+                  className={`nav-link ${
+                    location.pathname === "/" ? "active" : ""
+                  }`}
+                >
                   Beranda
                 </Nav.Link>
-                <Nav.Link as={Link} to="/products">
+                <Nav.Link
+                  as={Link}
+                  to="/products"
+                  className={`nav-link ${
+                    location.pathname === "/products" ? "active" : ""
+                  }`}
+                >
                   Produk
                 </Nav.Link>
-                <Nav.Link as={Link} to="/contact">
+                <Nav.Link
+                  as={Link}
+                  to="/contact"
+                  className={`nav-link ${
+                    location.pathname === "/contact" ? "active" : ""
+                  }`}
+                >
                   Kontak Kami
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about-us">
+                <Nav.Link
+                  as={Link}
+                  to="/about-us"
+                  className={`nav-link ${
+                    location.pathname === "/about-us" ? "active" : ""
+                  }`}
+                >
                   Tentang Kami
                 </Nav.Link>
               </Nav>
               <hr />
               {authToken ? (
                 <Dropdown align="end">
-                  <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+                  <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
                     Pengguna
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to="/user-profile">Profil Saya</Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/my-order">Data Order</Dropdown.Item> {/* Tambahkan link ke Order List */}
+                    <Dropdown.Item as={Link} to="/user-profile">
+                      Profil Saya
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/my-order">
+                      Data Order
+                    </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
@@ -96,10 +119,10 @@ const Header = () => {
               ) : (
                 <>
                   <ButtonGroup as={Link} to="/login" className="me-3">
-                    <Button variant="primary">Masuk</Button>
+                    <Button variant="success">Masuk</Button>
                   </ButtonGroup>
                   <ButtonGroup as={Link} to="/register">
-                    <Button variant="outline-primary">Daftar</Button>
+                    <Button variant="outline-success">Daftar</Button>
                   </ButtonGroup>
                 </>
               )}

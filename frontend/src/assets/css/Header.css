@@ -3,7 +3,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   display: flex;
   padding: 5px 30px;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 
 /* Navbar Brand */
@@ -13,19 +13,43 @@
 }
 
 .navbar-brand h1 span {
-  color: rgba(226,23,70,0.8);
+  
 }
 
 /* Navbar Links */
 .nav-link {
   font-size: 16px;
   margin-right: 15px;
+  position: relative;
+  display: inline-block;
   transition: color 0.3s ease;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.nav-link:hover {
-  color: #3B71CA;
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Jarak garis bawah dari teks */
+  width: 0;
+  height: 2px;
+  background-color: #198754;
+  transition: width 0.3s ease;
 }
+
+.nav-link:hover,
+.nav-link.active {
+  color: #198754 !important;
+  
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+
+}
+
 
 /* Misc */
 .offcanvas-animation {
@@ -44,3 +68,5 @@
 .btn-primary, .btn-outline-primary, .btn-outline-danger {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+

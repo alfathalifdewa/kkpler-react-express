@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import api from '../../api';
-import HeaderDashboard from '../../Components/Admin/HeaderDashboard';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import api from "../../api";
+import Sidebar from "../../Components/Admin/Sidebar";
 
 const DashboardPage = () => {
   const [users, setUsers] = useState([]);
@@ -18,54 +18,57 @@ const DashboardPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await api.get('/users/all');
-      setUsers(response.data.slice(0, 3)); // Display first 3 users
+      const response = await api.get("/users/all");
+      setUsers(response.data.slice(0, 3));
     } catch (error) {
-      console.error('Failed to fetch users', error);
+      console.error("Failed to fetch users", error);
     }
   };
 
   const fetchProducts = async () => {
     try {
-      const response = await api.get('/products');
-      setProducts(response.data.products.slice(0, 3)); // Display first 3 products
+      const response = await api.get("/products");
+      setProducts(response.data.products.slice(0, 3));
     } catch (error) {
-      console.error('Failed to fetch products', error);
+      console.error("Failed to fetch products", error);
     }
   };
 
   const fetchOrders = async () => {
     try {
-      const response = await api.get('/order/all');
-      setOrders(response.data.slice(0, 3)); // Display first 3 orders
+      const response = await api.get("/order/all");
+      setOrders(response.data.slice(0, 3));
     } catch (error) {
-      console.error('Failed to fetch orders', error);
+      console.error("Failed to fetch orders", error);
     }
   };
 
   return (
-    <>
-      <HeaderDashboard />
-      <Container className="mt-5">
+    <div className="dashboard-container">
+      <Sidebar />
+      <Container className="dashboard-content mt-5">
         <Row>
           <Col md={4}>
-            <Card>
-              <Card.Header>User List</Card.Header>
+            <Card className="bg-info text-white">
+              <Card.Header className="fw-bold">User List</Card.Header>
               <Card.Body>
                 {users.map((user) => (
                   <div key={user._id}>
                     <p>{user.username}</p>
                   </div>
                 ))}
-                <Button variant="primary" onClick={() => navigate('/dashboard/user-list')}>
+                <Button
+                  variant="light"
+                  onClick={() => navigate("/dashboard/user-list")}
+                >
                   Show More
                 </Button>
               </Card.Body>
             </Card>
           </Col>
           <Col md={4}>
-            <Card>
-              <Card.Header>Product List</Card.Header>
+            <Card className="bg-warning text-white mt-lg-0 mt-4">
+              <Card.Header className="fw-bold">Product List</Card.Header>
               <Card.Body>
                 {products.map((product) => (
                   <div key={product._id}>
@@ -73,15 +76,18 @@ const DashboardPage = () => {
                     <p>{product.price}</p>
                   </div>
                 ))}
-                <Button variant="primary" onClick={() => navigate('/dashboard/product-list')}>
+                <Button
+                  variant="light"
+                  onClick={() => navigate("/dashboard/product-list")}
+                >
                   Show More
                 </Button>
               </Card.Body>
             </Card>
           </Col>
           <Col md={4}>
-            <Card>
-              <Card.Header>Order List</Card.Header>
+            <Card className="bg-success text-white  mt-lg-0 mt-4">
+              <Card.Header className="fw-bold">Order List</Card.Header>
               <Card.Body>
                 {orders.map((order) => (
                   <div key={order._id}>
@@ -89,7 +95,10 @@ const DashboardPage = () => {
                     <p>{order.total}</p>
                   </div>
                 ))}
-                <Button variant="primary" onClick={() => navigate('/dashboard/order-list')}>
+                <Button
+                  variant="light"
+                  onClick={() => navigate("/dashboard/order-list")}
+                >
                   Show More
                 </Button>
               </Card.Body>
@@ -97,7 +106,7 @@ const DashboardPage = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

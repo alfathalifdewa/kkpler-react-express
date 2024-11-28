@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
 import api from '../../api';
-import HeaderDashboard from '../../Components/Admin/HeaderDashboard';
+import Sidebar from '../../Components/Admin/Sidebar';
 
 const OrderListPage = () => {
   const [orders, setOrders] = useState([]);
@@ -58,7 +58,7 @@ const OrderListPage = () => {
 
   return (
     <>
-      <HeaderDashboard />
+      <Sidebar />
       <Container>
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Order List</h3>

@@ -1,10 +1,9 @@
-// src/Pages/User/DetailProduct.js
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Plus, Dash } from 'react-bootstrap-icons';
 import Header from '../../Components/User/Header';
 import Footer from '../../Components/User/Footer';
-import { Container, Row, Col, Breadcrumb, Image, Button } from 'react-bootstrap';
+import { Container, Row, Col, Breadcrumb, Image, Button, Modal } from 'react-bootstrap';
 import '../../assets/css/DetailProduct.css';
 import api from '../../api';
 import FloatingCart from '../../Components/User/FloatingCart';
@@ -15,6 +14,7 @@ const DetailProduct = () => {
   const [product, setProduct] = useState(null);
   const [itemCount, setItemCount] = useState(1);
   const { addToCart } = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false); // State untuk modal
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,7 +40,8 @@ const DetailProduct = () => {
   const handleAddToCart = async () => {
     try {
       await addToCart(id, itemCount);
-      setItemCount(1); // Reset itemCount after adding to cart
+      setItemCount(1); // Reset itemCount setelah item ditambahkan
+      setShowModal(false); // Tutup modal setelah berhasil menambahkan ke keranjang
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
@@ -82,15 +83,19 @@ const DetailProduct = () => {
               </h4>
               <p className="per-strip">Per STRIP</p>
               <div className="detail-product-actions">
-                <Button variant="primary" className="cart-button" onClick={handleAddToCart}>
+                <Button
+                  variant="success"
+                  className="cart-button"
+                  onClick={() => setShowModal(true)} // Buka modal saat tombol diklik
+                >
                   + Tambah ke Keranjang
                 </Button>
                 <div className="d-flex justify-content-between align-items-center mt-2">
-                  <Button variant="outline-primary" className="cart-button" onClick={handleDecrement}>
+                  <Button variant="outline-success" className="cart-button" onClick={handleDecrement}>
                     <Dash />
                   </Button>
                   <span>{itemCount}</span>
-                  <Button variant="primary" className="cart-button" onClick={handleIncrement}>
+                  <Button variant="success" className="cart-button" onClick={handleIncrement}>
                     <Plus />
                   </Button>
                 </div>
@@ -120,6 +125,24 @@ const DetailProduct = () => {
           <p>Loading...</p>
         )}
       </Container>
+
+      {/* Modal Konfirmasi */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Konfirmasi</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Apakah Anda yakin ingin menambahkan <strong>{itemCount}</strong> {product?.productName} ke keranjang?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Batal
+          </Button>
+          <Button variant="success" onClick={handleAddToCart}>
+            Ya, Tambahkan
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Footer />
     </>
   );

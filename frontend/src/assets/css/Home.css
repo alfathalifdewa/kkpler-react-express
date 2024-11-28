@@ -105,6 +105,7 @@ h5 {
   height: auto;
 }
 
+
 .card-img-overlay {
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -130,7 +131,7 @@ h5 {
 
 .see-all-button {
   padding: 20px;
-  color: #007bff;
+  color: #198754;
   cursor: pointer;
   text-decoration: none;
 }
@@ -143,7 +144,7 @@ a {
 /* PRODUCT */
 .product-container {
   text-align: center;
-  padding: 30px;
+  padding: 20px;
 }
 
 .product-box {
@@ -156,8 +157,11 @@ a {
   text-decoration: none;
   color: inherit;
   position: relative;
-  overflow: hidden;
   transition: transform 0.2s;
+  padding: 20px;
+}
+ .product-card-img{
+  height: 300px;
 }
 
 .product-card:hover {
@@ -193,6 +197,10 @@ a {
   color: #ffffff;
   border: 1px solid rgba(226, 23, 70, 0.8);
 }
+
+/* faq */
+ 
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {

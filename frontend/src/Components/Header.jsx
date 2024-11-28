@@ -34,7 +34,7 @@ const Header = ({
                 height="45"
                 className="d-inline-block align-center"
               />
-              <span className="ms-3 navbar-brand-text">Pharmora.id</span>
+              <span className="ms-3 navbar-brand-text">Sayurku.id</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbarLabel-expand-lg`} />
             <Navbar.Offcanvas
@@ -45,12 +45,12 @@ const Header = ({
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                   <img
-                    src="../../assets/logo.png"
+                    src="../../assets/logo1.jpeg"
                     alt="Logo"
                     height="40"
                     className="d-inline-block align-top"
                   />
-                  <span className="ms-2">Pharmora.id</span>
+                  <span className="ms-2">Sayurku.id</span>
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
@@ -94,12 +94,12 @@ const Header = ({
               className="d-flex align-items-center"
             >
               <img
-                src="../../assets/logo.png"
+                src="../../assets/logo1.jpeg"
                 alt="Logo"
                 height="45"
                 className="d-inline-block align-center"
               />
-              <span className="ms-3 navbar-brand-text">Pharmora.id</span>
+              <span className="ms-3 navbar-brand-text">Sayurku.id.id</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbarLabel-expand-lg`} />
             <Navbar.Offcanvas
@@ -110,12 +110,12 @@ const Header = ({
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-lg`}>
                   <img
-                    src="../../assets/logo.png"
+                    src="../../assets/logo1.jpeg"
                     alt="Logo"
                     height="40"
                     className="d-inline-block align-top"
                   />
-                  <span className="ms-2">Pharmora.id</span>
+                  <span className="ms-2">Sayurku.id</span>
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>

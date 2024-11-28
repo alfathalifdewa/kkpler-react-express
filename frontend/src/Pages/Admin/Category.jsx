@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
 import api from '../../api';
-import HeaderDashboard from '../../Components/Admin/HeaderDashboard';
+import Sidebar from '../../Components/Admin/Sidebar';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -84,11 +84,11 @@ const CategoryList = () => {
 
   return (
     <>
-      <HeaderDashboard />
+      <Sidebar />
       <Container>
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Category List</h3>
-          <Button variant="primary" onClick={() => handleShowModal(null)}>
+          <Button variant="success" onClick={() => handleShowModal(null)}>
             Add Category
           </Button>
         </div>
@@ -168,12 +168,15 @@ const CategoryList = () => {
                 <option value="🩹">🩹</option>
               </Form.Control>
             </Form.Group>
+            <div className='d-flex gap-3'>
             <Button variant="secondary" onClick={handleCloseModal}>
               Close
             </Button>
             <Button variant="primary" type="submit">
               {selectedCategory ? 'Save Changes' : 'Add Category'}
             </Button>
+            </div>
+           
           </Form>
         </Modal.Body>
       </Modal>

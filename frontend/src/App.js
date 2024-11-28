@@ -34,7 +34,7 @@ import ProductList from './Pages/Admin/ProductList';
 import OrderListPage from './Pages/Admin/OrderList';
 import UserListPage from './Pages/Admin/UserListPage';
 import CategoryListPage from './Pages/Admin/Category';
-
+import ScrollToTop from './Components/ScrollToTop';
 const App = () => {
   return (
     <CartProvider>
@@ -69,6 +69,7 @@ const App = () => {
           </Routes>
           <FloatingCart />
         </div>
+        <ScrollToTop />
       </Router>
     </CartProvider>
   );

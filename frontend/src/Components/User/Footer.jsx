@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-center text-lg-start text-light">
+    <footer className="bg-success text-center text-lg-start text-light">
       <Container className="text-center text-md-start mt-5 ">
         <section className="d-flex justify-content-between align-items-center p-4 mb-0 border-bottom">
           <div className="me-5 d-none d-lg-block">
@@ -51,10 +51,9 @@ const Footer = () => {
         </section>
         <Row className="mt-5 mb-5">
           <Col md="3" lg="4" xl="3" className="mx-auto mb-4 ">
-            <h6 className="text-uppercase fw-bold mb-4">PHARMORA.ID</h6>
+            <h6 className="text-uppercase fw-bold mb-4">SAYURKU.ID</h6>
             <p>
-              Pharmora.id adalah apotek online untuk solusi kesehatan yang
-              modern dan terpercaya.
+              Sayurku.id adalah Toko Sayur online untuk solusi kenutuhan sayur anda di setiap hari.
             </p>
           </Col>
 
@@ -90,7 +89,7 @@ const Footer = () => {
             </p>
             <p>
               <Envelope color="white" className="me-3" />
-              pharmora.id@help.com
+              sayurku.id@help.com
             </p>
             <p>
               <Telephone color="white" className="me-3" />
@@ -130,7 +129,7 @@ const Footer = () => {
                   <div className="col-12">
                     <div className="d-grid">
                       <Button
-                        variant="primary"
+                        variant="success"
                         type="submit"
                         style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
                       >
@@ -148,7 +147,7 @@ const Footer = () => {
       <div className="text-center p-4 border-top">
         © 2024 Copyright:
         <Link as={Link} to="/" className="text-reset fw-bold ms-2">
-          Pharmora.id
+          Sayurku.id
         </Link>
       </div>
     </footer>

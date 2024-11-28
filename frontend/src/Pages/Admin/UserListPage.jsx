@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Table, Button, Modal, Form } from "react-bootstrap";
 import api from "../../api";  // Adjust the import based on your project structure
-import HeaderDashboard from "../../Components/Admin/HeaderDashboard";
+import Sidebar from "../../Components/Admin/Sidebar";
+
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -43,7 +44,7 @@ function UserList() {
 
   return (
     <>
-      <HeaderDashboard />
+      <Sidebar />
       <Container>
         <h2 className="text-center p-5 m-5">User List</h2>
         <Table striped bordered hover>

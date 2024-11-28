@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+
 import { useParams, useNavigate, Link } from "react-router-dom";
 import api from "../../api";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
@@ -13,40 +14,40 @@ const ProductsByCategory = () => {
   const [categories, setCategories] = useState([]); // State to store categories
 
   // Fetch products based on category
-  const fetchProductsByCategory = async () => {
+  const fetchProductsByCategory = useCallback(async () => {
     try {
       const response = await api.get(`/products/category/${id_category}`);
       setProducts(response.data.products);
     } catch (error) {
       console.error("Error fetching products by category", error);
     }
-  };
-
-  // Fetch category information
-  const fetchCategoryInfo = async () => {
+  }, [id_category]);
+  
+  const fetchCategoryInfo = useCallback(async () => {
     try {
       const response = await api.get(`/category/${id_category}`);
       setCategory(response.data.category);
     } catch (error) {
       console.error("Error fetching category info", error);
     }
-  };
-
-  // Fetch all categories for the sidebar
-  const fetchAllCategories = async () => {
+  }, [id_category]);
+  
+  const fetchAllCategories = useCallback(async () => {
     try {
       const response = await api.get('/category');
       setCategories(response.data.category);
     } catch (error) {
       console.error("Error fetching categories", error);
     }
-  };
+  }, []);
+  
 
   useEffect(() => {
     fetchProductsByCategory();
     fetchCategoryInfo();
-    fetchAllCategories(); // Fetch all categories when component mounts
-  }, [id_category]);
+    fetchAllCategories();
+  }, [fetchProductsByCategory, fetchCategoryInfo, fetchAllCategories]);
+  
 
   // Navigate to product detail page
   const handleProductClick = (product) => {
@@ -72,7 +73,7 @@ const ProductsByCategory = () => {
             <Col xs={12}>
               <Row className="align-items-center justify-content-between">
                 <Col>
-                  <h5>Kategori</h5>
+                  <h5 className="text-secondary text-uppercase">Kategori</h5>
                 </Col>
               </Row>
               <Row className="g-3 justify-content-center">
@@ -116,15 +117,14 @@ const ProductsByCategory = () => {
 
 
         {/* Product Cards */}
-        <Row className="g-3 justify-content-center">
+        <Row className="g-3 ">
           {products.map((item, index) => (
             <Col
               key={index}
               xs={12}
               sm={6}
               md={4}
-              lg={3}
-              className="d-flex justify-content-center"
+              className=""
             >
               <Card
                 className="product-card h-100 border-0 shadow"
@@ -138,7 +138,7 @@ const ProductsByCategory = () => {
                 <Card.Body>
                   <Card.Title className="product-name">{item.productName}</Card.Title>
                   <Card.Text className="product-price">{formatIDR(item.price)}</Card.Text>
-                  <Button variant="outline-primary" className="w-100 mt-auto">
+                  <Button variant="outline-success" className="w-100 mt-auto">
                     Detail
                   </Button>
                 </Card.Body>

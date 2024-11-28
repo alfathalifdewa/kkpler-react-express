@@ -42,8 +42,8 @@ const Login = () => {
   return (
     <Container className="login-container">
       <Container as={Link} to="/">
-        <h1 className="fw-bold text-center fs-1">
-          Pharmora<span>.id</span>
+        <h1 className="fw-bold text-center fs-1 text-success">
+          Sayurku<span className='text-secondary'>.id</span>
         </h1>
       </Container>
 
@@ -74,7 +74,7 @@ const Login = () => {
                 required
               />
               <Button
-                variant="outline-primary"
+                variant="outline-success"
                 className="mb-2"
                 onClick={togglePasswordVisibility}
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
@@ -85,7 +85,7 @@ const Login = () => {
           </Form.Group>
 
           <div className="d-flex justify-content-between mt-3">
-            <Button variant="primary" type="submit">
+            <Button variant="success" type="submit">
               Login
             </Button>
             <Button variant="link" as={Link} to="/forgot-password">

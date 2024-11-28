@@ -144,7 +144,7 @@ function UserProfilePage() {
               </Row>
               {editMode ? (
                 <div className="d-flex justify-content-left text-center">
-                  <Button type="submit" variant="primary" className="me-3">
+                  <Button type="submit" variant="success" className="me-3">
                     Update
                   </Button>
                   <Button variant="secondary" onClick={cancelEdit}>
@@ -152,7 +152,7 @@ function UserProfilePage() {
                   </Button>
                 </div>
               ) : (
-                <Button variant="primary" onClick={() => setEditMode(true)}>
+                <Button variant="success" className="btn-md w-25" onClick={() => setEditMode(true)}>
                   Edit
                 </Button>
               )}

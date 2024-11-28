@@ -30,8 +30,8 @@ const Register = () => {
   return (
     <Container className="register-container">
       <Container as={Link} to="/">
-        <h1 className="fw-bold text-center fs-1">
-          Pharmora<span>.id</span>
+        <h1 className="fw-bold text-center fs-1 text-success">
+          Sayurku<span className='text-secondary'>.id</span>
         </h1>
       </Container>
 
@@ -95,7 +95,7 @@ const Register = () => {
             />
           </Form.Group>
           <div className="d-flex justify-content-between mt-3">
-            <Button variant="primary" type="submit">
+            <Button variant="success" type="submit">
               Register
             </Button>
           </div>

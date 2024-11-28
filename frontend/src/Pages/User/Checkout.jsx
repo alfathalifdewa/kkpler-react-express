@@ -109,7 +109,7 @@ const Cart = () => {
                     </Row>
                   </ListGroup.Item>
                 </ListGroup>
-                <Button variant="primary" className="w-100 mt-3" onClick={handleCheckout}>
+                <Button variant="success" className="w-100 mt-3" onClick={handleCheckout}>
                   Lanjutkan Pembayaran
                 </Button>
               </Card.Body>

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col, Image, Card } from "react-bootstrap";
 import { StarFill, Star } from "react-bootstrap-icons";
-import about01 from "../../assets/img/about01.png";
-import about02 from "../../assets/img/about02.png";
+import about01 from "../../assets/img/aboutme.png";
+import about02 from "../../assets/img/aboutme2.png";
 import testimonials01 from "../../assets/img/testimonial-img-1.png";
 import testimonials02 from "../../assets/img/testimonial-img-2.png";
 import testimonials03 from "../../assets/img/testimonial-img-3.png";
@@ -47,11 +47,11 @@ const About = () => {
             <Container className="h-100">
               <Row className="d-flex justify-content-center align-items-center h-100">
                 <Col className="text-white">
-                  <h1 className="mb-3">
+                  <h1 className="mb-3 animate__animated animate__bounceInLeft">
                     Solusi Terbaik Untuk Kebutuhan Kesehatan Anda
                   </h1>
-                  <h4 className="mb-3">
-                    Pharmora.id adalah apotek online untuk solusi kesehatan yang
+                  <h4 className="mb-3 animate__animated animate__bounceInRight animate__delay-1s">
+                    Sayurku.id adalah Toko Sayur online untuk solusi kesehatan yang
                     modern dan terpercaya.
                   </h4>
                 </Col>
@@ -63,8 +63,8 @@ const About = () => {
         {/* ABOUT US */}
         <Container className="mt-5 about-container">
           <Row className="gy-3 gy-md-4 gy-lg-0 align-items-lg-center">
-            <Col xs={12} lg={6} xl={5}>
-              <Image fluid rounded src={about02} alt="About 2" loading="lazy" />
+            <Col xs={12} lg={6} xl={5} >
+              <Image fluid rounded src={about02} alt="About 2" loading="lazy" className="shadow" data-aos="flip-left" data-aos-duration="1000" />
             </Col>
             <Col xs={12} lg={6} xl={7}>
               <Row className="justify-content-xl-center">
@@ -73,9 +73,9 @@ const About = () => {
                     Tentang Kami
                   </h3>
                   <p className="lead fs-4 mb-3">
-                    Pharmora.id adalah apotek online untuk solusi kesehatan yang
-                    modern dan terpercaya, menawarkan beragam produk farmasi
-                    berkualitas tinggi dan layanan yang ramah pengguna.
+                  Sayurku.id adalah toko sayur online yang modern dan terpercaya, 
+                  menyediakan beragam sayur segar berkualitas tinggi dengan layanan yang ramah 
+                  pengguna untuk memenuhi kebutuhan dapur Anda setiap hari.
                   </p>
                   <p className="mb-5">
                     Kami adalah perusahaan yang berkembang pesat, namun kami
@@ -89,11 +89,11 @@ const About = () => {
                       <Card className="border-0 shadow">
                         <Card.Body className="d-flex align-items-start">
                           <div>
-                            <h4 className="h4 mb-3">Visi</h4>
+                            <h4 className="h4 mb-3 text-success">Visi</h4>
                             <p className="text-secondary mb-0">
-                              Menjadi apotek online terdepan di Indonesia yang
-                              memberikan solusi kesehatan terbaik dengan
-                              pelayanan yang unggul, inovatif, dan terpercaya.
+                            Menjadi toko sayur online terdepan di Indonesia yang 
+                            menyediakan kebutuhan sayur segar 
+                            terbaik dengan pelayanan yang unggul, inovatif, dan terpercaya.
                             </p>
                           </div>
                         </Card.Body>
@@ -103,12 +103,11 @@ const About = () => {
                       <Card className="border-0 shadow">
                         <Card.Body className="d-flex align-items-start">
                           <div>
-                            <h4 className="h4 mb-3">Misi</h4>
+                            <h4 className="h4 mb-3 text-success">Misi</h4>
                             <p className="text-secondary mb-0">
-                              Memberikan layanan pelanggan yang ramah,
-                              responsif, dan profesional untuk memastikan
-                              pengalaman berbelanja yang menyenangkan dan
-                              memuaskan.
+                            Memberikan layanan pelanggan yang ramah, responsif, dan profesional
+                             untuk memastikan pengalaman berbelanja sayur
+                              yang mudah, nyaman, dan memuaskan.
                             </p>
                           </div>
                         </Card.Body>
@@ -124,7 +123,7 @@ const About = () => {
         {/* OUR SUCCESS */}
         <Container className="mt-5 penjualan-container">
           <Row className="justify-content-md-center">
-            <Col xs={12} md={10} lg={8} xl={7}>
+            <Col xs={12} md={10} lg={8} xl={7} >
               <h3 className="fs-4 m-4 text-secondary text-center text-uppercase">
                 Kesuksesan Kami
               </h3>
@@ -134,7 +133,7 @@ const About = () => {
             <Col xs={12}>
               <Container fluid className="bg-accent border-0 ">
                 <Row>
-                  <Col xs={12} md={4} className="p-0">
+                  <Col xs={12} md={4} className="p-0" data-aos="zoom-in" data-aos-duration="1000">
                     <Card border="0" className="bg-transparent">
                       <Card.Body className="text-center p-4 p-xxl-5">
                         <h3 className="display-4 fw-bold mb-2 fs-1">60+</h3>
@@ -142,7 +141,7 @@ const About = () => {
                       </Card.Body>
                     </Card>
                   </Col>
-                  <Col xs={12} md={4} className="p-0 border-start border-end">
+                  <Col xs={12} md={4} className="p-0 border-start border-end" data-aos="zoom-in" data-aos-duration="1000">
                     <Card border="0" className="bg-transparent">
                       <Card.Body className="text-center p-4 p-xxl-5">
                         <h3 className="display-4 fw-bold mb-2 fs-1">18rb+</h3>
@@ -152,7 +151,7 @@ const About = () => {
                       </Card.Body>
                     </Card>
                   </Col>
-                  <Col xs={12} md={4} className="p-0">
+                  <Col xs={12} md={4} className="p-0" data-aos="zoom-in" data-aos-duration="1000">
                     <Card border="0" className="bg-transparent">
                       <Card.Body className="text-center p-4 p-xxl-5">
                         <h3 className="display-4 fw-bold mb-2 fs-1">12rb+</h3>
@@ -184,10 +183,10 @@ const About = () => {
                 <Card.Body className="p-4 p-xxl-5">
                   <StarRating stars={5} />
                   <blockquote className="bsb-blockquote-icon mb-3">
-                    Apotek ini menyediakan layanan yang luar biasa. Pesanan saya
+                    Toko ini menyediakan layanan yang luar biasa. Pesanan saya
                     selalu tiba tepat waktu dan produk-produknya berkualitas
-                    tinggi. Saya sangat merekomendasikan apotek ini kepada siapa
-                    saja yang membutuhkan solusi kesehatan yang dapat
+                    tinggi. Saya sangat merekomendasikan Toko ini kepada siapa
+                    saja yang membutuhkan Kualitas Sayur yang dapat
                     diandalkan.
                   </blockquote>
                   <figure className="d-flex align-items-center m-0 p-0">
@@ -212,8 +211,8 @@ const About = () => {
                 <Card.Body className="p-4 p-xxl-5">
                   <StarRating stars={3} />
                   <blockquote className="bsb-blockquote-icon mb-3">
-                    Layanan pelanggan apotek ini sangat responsif dan membantu.
-                    Saya berhasil menemukan semua obat yang saya butuhkan dengan
+                    Layanan pelanggan Toko ini sangat responsif dan membantu.
+                    Saya bisa mendapatkan semua sayur yang saya butuhkan dengan
                     bantuan customer service, meskipun beberapa produk sering
                     habis stok.
                   </blockquote>
@@ -239,7 +238,7 @@ const About = () => {
                 <Card.Body className="p-4 p-xxl-5">
                   <StarRating stars={4} />
                   <blockquote className="bsb-blockquote-icon mb-3">
-                    Apotek ini memiliki berbagai macam produk kesehatan dan
+                    Toko ini memiliki berbagai macam produk  dan
                     harga yang kompetitif. Namun, terkadang pengirimannya agak
                     lambat, tetapi secara keseluruhan saya cukup puas.
                   </blockquote>
@@ -265,7 +264,7 @@ const About = () => {
                 <Card.Body className="p-4 p-xxl-5">
                   <StarRating stars={5} />
                   <blockquote className="bsb-blockquote-icon mb-3">
-                    Apotek ini membantu saya mendapatkan obat yang sulit
+                    Toko ini membantu saya mendapatkan Sayur yang sulit
                     ditemukan di tempat lain. Layanan pengirimannya sangat cepat
                     dan terpercaya. Saya akan terus berbelanja di sini.
                   </blockquote>

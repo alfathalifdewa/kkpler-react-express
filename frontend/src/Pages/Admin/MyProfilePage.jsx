@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
-import HeaderDashboard from "../../Components/Admin/HeaderDashboard";
 import api from "../../api";
+import Sidebar from "../../Components/Admin/Sidebar";
 
 function MyProfilePage() {
   const [initialValues, setInitialValues] = useState({
@@ -61,7 +61,7 @@ function MyProfilePage() {
 
   return (
     <>
-      <HeaderDashboard />
+      <Sidebar />
       <Container className="mt-5">
         <Card className="shadow border-0">
           <Card.Body>
