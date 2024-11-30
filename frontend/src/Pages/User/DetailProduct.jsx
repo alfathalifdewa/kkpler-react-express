@@ -14,7 +14,7 @@ const DetailProduct = () => {
   const [product, setProduct] = useState(null);
   const [itemCount, setItemCount] = useState(1);
   const { addToCart } = useContext(CartContext);
-  const [showModal, setShowModal] = useState(false); // State untuk modal
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,8 +40,8 @@ const DetailProduct = () => {
   const handleAddToCart = async () => {
     try {
       await addToCart(id, itemCount);
-      setItemCount(1); // Reset itemCount setelah item ditambahkan
-      setShowModal(false); // Tutup modal setelah berhasil menambahkan ke keranjang
+      setItemCount(1);
+      setShowModal(false);
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
@@ -81,12 +81,12 @@ const DetailProduct = () => {
               <h4 className="detail-product-price">
                 <span>{formatRupiah(product.price)}</span>
               </h4>
-              <p className="per-strip">Per STRIP</p>
+              <p className="per-unit">Per {product.unit.toUpperCase()}</p>
               <div className="detail-product-actions">
                 <Button
                   variant="success"
                   className="cart-button"
-                  onClick={() => setShowModal(true)} // Buka modal saat tombol diklik
+                  onClick={() => setShowModal(true)}
                 >
                   + Tambah ke Keranjang
                 </Button>
@@ -104,20 +104,22 @@ const DetailProduct = () => {
               <div className="product-deskripsi">
                 <h3>Deskripsi</h3>
                 <p>{product.desc}</p>
-                <h4>Indikasi / Kegunaan</h4>
-                <p>{product.indication}</p>
-                <h4>Kandungan / Komposisi</h4>
-                <p>{product.composition}</p>
-                <h4>Dosis</h4>
-                <p>{product.dose}</p>
-                <h4>Cara Pemakaian</h4>
-                <p>{product.howtouse}</p>
-                <h4>Golongan</h4>
-                <p>{product.group}</p>
-                <h4>Efek Samping</h4>
-                <p>{product.effect}</p>
-                <h4>Nomor Ijin Edar (NIE)</h4>
-                <p>{product.nie}</p>
+                <h4>Informasi Nilai Gizi</h4>
+                <ul>
+                  <li>Kalori: {product.nutrition.calories} kkal</li>
+                  <li>Protein: {product.nutrition.protein}</li>
+                  <li>Karbohidrat: {product.nutrition.carbohydrates}</li>
+                  <li>Serat: {product.nutrition.fiber}</li>
+                  <li>Vitamin C: {product.nutrition.vitaminC}</li>
+                </ul>
+                <h4>Tanggal Panen</h4>
+                <p>{product.harvestDate}</p>
+                <h4>Tanggal Kedaluwarsa</h4>
+                <p>{product.expiryDate}</p>
+                <h4>Asal Produk</h4>
+                <p>{product.origin}</p>
+                <h4>Ketersediaan</h4>
+                <p>{product.availability ? 'Tersedia' : 'Tidak Tersedia'}</p>
               </div>
             </Col>
           </Row>
@@ -126,7 +128,6 @@ const DetailProduct = () => {
         )}
       </Container>
 
-      {/* Modal Konfirmasi */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Konfirmasi</Modal.Title>

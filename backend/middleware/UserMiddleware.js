@@ -24,10 +24,3 @@ export const adminMiddleware = (req, res, next) => {
     }
     next();
 };
-
-export const superAdminMiddleware = (req, res, next) => {
-    if (req.user.role !== 'Superadmin') {
-        return res.status(403).json({ msg: 'Access denied' });
-    }
-    next();
-};

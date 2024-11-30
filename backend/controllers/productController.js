@@ -8,39 +8,51 @@ export const getProducts = async (req, res) => {
       ...product._doc,
       image: product.image ? `${req.protocol}://${req.get('host')}${product.image}` : null
     }));
-    res.status(201).json({ products: productsWithImageUrl });
+    res.status(200).json({ products: productsWithImageUrl });
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
     res.status(500).send("Server Error");
   }
 };
 
 // Post a new product
 export const postProducts = async (req, res) => {
-  const { productName, id_category, desc, indication, composition, dose, howtouse, effect, group, nie, price } = req.body;
+  const {
+    productName,
+    id_category,
+    desc,
+    nutrition,
+    harvestDate,
+    expiryDate,
+    origin,
+    price,
+    unit,
+    availability,
+  } = req.body;
 
   try {
     const newProduct = new Product({
       productName,
       id_category,
-      image: req.file ? `/${req.file.path}` : null, // Menyimpan path ke gambar yang di-upload
+      image: req.file ? `/${req.file.path}` : null,
       desc,
-      indication,
-      composition,
-      dose,
-      howtouse,
-      effect,
-      group,
-      nie,
+      nutrition,
+      harvestDate,
+      expiryDate,
+      origin,
       price,
+      unit,
+      availability,
     });
+
     const saveProduct = await newProduct.save();
     res.status(201).json({ saveProduct });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 };
+
 
 
 // Get a product by ID
@@ -53,10 +65,9 @@ export const getProductsById = async (req, res) => {
       return res.status(404).json({ message: "Product Not Found" });
     }
 
-    // Append image URL if image path exists
     const productWithImageUrl = {
       ...product._doc,
-      image: product.image ? `${req.protocol}://${req.get('host')}${product.image}` : null
+      image: product.image ? `${req.protocol}://${req.get('host')}${product.image}` : null,
     };
 
     res.status(200).json({ product: productWithImageUrl });
@@ -67,11 +78,24 @@ export const getProductsById = async (req, res) => {
 };
 
 
+
 // Update a product
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { productName, id_category, desc, indication, composition, dose, howtouse, effect, group, nie, price } = req.body;
-  const image = req.file ? `/${req.file.path}` : null; // Menyimpan path ke gambar yang di-upload
+  const {
+    productName,
+    id_category,
+    desc,
+    nutrition,
+    harvestDate,
+    expiryDate,
+    origin,
+    price,
+    unit,
+    availability,
+  } = req.body;
+
+  const image = req.file ? `/${req.file.path}` : null;
 
   try {
     let product = await Product.findById(id);
@@ -84,14 +108,13 @@ export const updateProduct = async (req, res) => {
     product.id_category = id_category || product.id_category;
     product.image = image || product.image;
     product.desc = desc || product.desc;
-    product.indication = indication || product.indication;
-    product.composition = composition || product.composition;
-    product.dose = dose || product.dose;
-    product.howtouse = howtouse || product.howtouse;
-    product.effect = effect || product.effect;
-    product.group = group || product.group;
-    product.nie = nie || product.nie;
+    product.nutrition = nutrition || product.nutrition;
+    product.harvestDate = harvestDate || product.harvestDate;
+    product.expiryDate = expiryDate || product.expiryDate;
+    product.origin = origin || product.origin;
     product.price = price || product.price;
+    product.unit = unit || product.unit;
+    product.availability = availability || product.availability;
 
     const updatedProduct = await product.save();
     res.status(200).json({ updatedProduct });
@@ -100,6 +123,7 @@ export const updateProduct = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 
 
 // Delete a product
@@ -121,6 +145,7 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
+
 // Get products by category
 export const getProductsByCategory = async (req, res) => {
   try {
@@ -131,10 +156,9 @@ export const getProductsByCategory = async (req, res) => {
       return res.status(404).json({ message: "No Products Found for this Category" });
     }
 
-    // Append image URL for each product if image path exists
     const productsWithImageUrl = products.map(product => ({
       ...product._doc,
-      image: product.image ? `${req.protocol}://${req.get('host')}${product.image}` : null
+      image: product.image ? `${req.protocol}://${req.get('host')}${product.image}` : null,
     }));
 
     res.status(200).json({ products: productsWithImageUrl });
@@ -143,4 +167,5 @@ export const getProductsByCategory = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 

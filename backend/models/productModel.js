@@ -4,12 +4,12 @@ const ProductSchema = new mongoose.Schema(
   {
     productName: {
       type: String,
-      required: false,
+      required: true,
       unique: true,
     },
     id_category: {
       type: String,
-      required: false,
+      required: true,
     },
     image: {
       type: String,
@@ -19,38 +19,53 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    indication: {
-      type: String,
-      required: false,
+    nutrition: {
+      calories: {
+        type: Number,
+        required: false,
+      },
+      protein: {
+        type: String,
+        required: false,
+      },
+      carbohydrates: {
+        type: String,
+        required: false,
+      },
+      fiber: {
+        type: String,
+        required: false,
+      },
+      vitaminC: {
+        type: String,
+        required: false,
+      },
     },
-    composition: {
-      type: String,
-      required: false,
+    harvestDate: {
+      type: Date,
+      required: true,
     },
-    dose: {
-      type: String,
-      required: false,
+    expiryDate: {
+      type: Date,
+      required: true,
     },
-    howtouse: {
+    origin: {
       type: String,
-      required: false,
-    },
-    effect: {
-      type: String,
-      required: false,
-    },
-    group: {
-      type: String,
-      required: false,
-    },
-    nie: {
-      type: String,
-      required: false,
+      required: true,
     },
     price: {
       type: Number,
       required: true,
       default: 0,
+    },
+    unit: {
+      type: String,
+      required: true,
+    },
+    availability: {
+      type: Boolean,
+      required: true,
+      default: true,
     },
   },
   {
