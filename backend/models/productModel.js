@@ -19,27 +19,25 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    nutrition: {
-      calories: {
-        type: Number,
-        required: false,
-      },
-      protein: {
-        type: String,
-        required: false,
-      },
-      carbohydrates: {
-        type: String,
-        required: false,
-      },
-      fiber: {
-        type: String,
-        required: false,
-      },
-      vitaminC: {
-        type: String,
-        required: false,
-      },
+    calories: {
+      type: Number,
+      required: false,
+    },
+    protein: {
+      type: String,
+      required: false,
+    },
+    carbohydrates: {
+      type: String,
+      required: false,
+    },
+    fiber: {
+      type: String,
+      required: false,
+    },
+    vitaminC: {
+      type: String,
+      required: false,
     },
     harvestDate: {
       type: Date,

@@ -21,7 +21,11 @@ export const postProducts = async (req, res) => {
     productName,
     id_category,
     desc,
-    nutrition,
+    calories,
+    protein,
+    carbohydrates,
+    fiber,
+    vitaminC,
     harvestDate,
     expiryDate,
     origin,
@@ -36,7 +40,11 @@ export const postProducts = async (req, res) => {
       id_category,
       image: req.file ? `/${req.file.path}` : null,
       desc,
-      nutrition,
+      calories,
+      protein,
+      carbohydrates,
+      fiber,
+      vitaminC,
       harvestDate,
       expiryDate,
       origin,
@@ -52,8 +60,6 @@ export const postProducts = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
-
-
 
 // Get a product by ID
 export const getProductsById = async (req, res) => {
@@ -77,8 +83,6 @@ export const getProductsById = async (req, res) => {
   }
 };
 
-
-
 // Update a product
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
@@ -86,7 +90,11 @@ export const updateProduct = async (req, res) => {
     productName,
     id_category,
     desc,
-    nutrition,
+    calories,
+    protein,
+    carbohydrates,
+    fiber,
+    vitaminC,
     harvestDate,
     expiryDate,
     origin,
@@ -108,7 +116,11 @@ export const updateProduct = async (req, res) => {
     product.id_category = id_category || product.id_category;
     product.image = image || product.image;
     product.desc = desc || product.desc;
-    product.nutrition = nutrition || product.nutrition;
+    product.calories = calories || product.calories;
+    product.protein = protein || product.protein;
+    product.carbohydrates = carbohydrates || product.carbohydrates;
+    product.fiber = fiber || product.fiber;
+    product.vitaminC = vitaminC || product.vitaminC;
     product.harvestDate = harvestDate || product.harvestDate;
     product.expiryDate = expiryDate || product.expiryDate;
     product.origin = origin || product.origin;
@@ -123,6 +135,7 @@ export const updateProduct = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
 
 
 

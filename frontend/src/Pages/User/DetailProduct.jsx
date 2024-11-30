@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Plus, Dash } from 'react-bootstrap-icons';
 import Header from '../../Components/User/Header';
 import Footer from '../../Components/User/Footer';
-import { Container, Row, Col, Breadcrumb, Image, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Breadcrumb, Image, Button, Modal, Card, ListGroup } from 'react-bootstrap';
 import '../../assets/css/DetailProduct.css';
 import api from '../../api';
 import FloatingCart from '../../Components/User/FloatingCart';
@@ -61,8 +61,8 @@ const DetailProduct = () => {
     <>
       <Header />
       <FloatingCart />
-      <Container className="detail-product-container">
-        <Breadcrumb className="breadcrumb">
+      <Container className="mt-5">
+        <Breadcrumb>
           <Breadcrumb.Item linkAs={Link} linkProps={{ to: '/' }}>
             Beranda
           </Breadcrumb.Item>
@@ -71,56 +71,68 @@ const DetailProduct = () => {
           </Breadcrumb.Item>
           <Breadcrumb.Item active>{product?.productName}</Breadcrumb.Item>
         </Breadcrumb>
+
         {product ? (
-          <Row className="detail-product">
-            <Col md={4} className="detail-product-image">
-              <Image src={product.image} alt={product.productName} fluid />
+          <Row>
+            <Col md={5}>
+              <Card className="mb-4">
+                <Card.Img variant="top" src={product.image} alt={product.productName} />
+              </Card>
             </Col>
-            <Col md={8} className="product-details">
-              <h3>{product.productName}</h3>
-              <h4 className="detail-product-price">
-                <span>{formatRupiah(product.price)}</span>
-              </h4>
-              <p className="per-unit">Per {product.unit.toUpperCase()}</p>
-              <div className="detail-product-actions">
-                <Button
-                  variant="success"
-                  className="cart-button"
-                  onClick={() => setShowModal(true)}
-                >
-                  + Tambah ke Keranjang
-                </Button>
-                <div className="d-flex justify-content-between align-items-center mt-2">
-                  <Button variant="outline-success" className="cart-button" onClick={handleDecrement}>
-                    <Dash />
-                  </Button>
-                  <span>{itemCount}</span>
-                  <Button variant="success" className="cart-button" onClick={handleIncrement}>
-                    <Plus />
-                  </Button>
-                </div>
-              </div>
-              <hr />
-              <div className="product-deskripsi">
-                <h3>Deskripsi</h3>
-                <p>{product.desc}</p>
-                <h4>Informasi Nilai Gizi</h4>
-                <ul>
-                  <li>Kalori: {product.nutrition.calories} kkal</li>
-                  <li>Protein: {product.nutrition.protein}</li>
-                  <li>Karbohidrat: {product.nutrition.carbohydrates}</li>
-                  <li>Serat: {product.nutrition.fiber}</li>
-                  <li>Vitamin C: {product.nutrition.vitaminC}</li>
-                </ul>
-                <h4>Tanggal Panen</h4>
-                <p>{product.harvestDate}</p>
-                <h4>Tanggal Kedaluwarsa</h4>
-                <p>{product.expiryDate}</p>
-                <h4>Asal Produk</h4>
-                <p>{product.origin}</p>
-                <h4>Ketersediaan</h4>
-                <p>{product.availability ? 'Tersedia' : 'Tidak Tersedia'}</p>
-              </div>
+
+            <Col md={7}>
+              <Card className="mb-4">
+                <Card.Body>
+                  <Card.Title>{product.productName}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">{formatRupiah(product.price)}</Card.Subtitle>
+                  <Card.Text>Per {product.unit.toUpperCase()}</Card.Text>
+
+                  <div className="mb-3">
+                    <Button
+                      variant="success"
+                      className="me-2"
+                      onClick={() => setShowModal(true)}
+                    >
+                      + Tambah ke Keranjang
+                    </Button>
+                    <div className="d-flex justify-content-between align-items-center mt-2">
+                      <Button variant="outline-success" onClick={handleDecrement}>
+                        <Dash />
+                      </Button>
+                      <span className="mx-2">{itemCount}</span>
+                      <Button variant="success" onClick={handleIncrement}>
+                        <Plus />
+                      </Button>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <h5>Deskripsi</h5>
+                  <p>{product.desc}</p>
+
+                  <h5>Informasi Nilai Gizi</h5>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item>Kalori: {product.calories} kkal</ListGroup.Item>
+                    <ListGroup.Item>Protein: {product.protein} g</ListGroup.Item>
+                    <ListGroup.Item>Karbohidrat: {product.carbohydrates} g</ListGroup.Item>
+                    <ListGroup.Item>Serat: {product.fiber} g</ListGroup.Item>
+                    <ListGroup.Item>Vitamin C: {product.vitaminC} mg</ListGroup.Item>
+                  </ListGroup>
+
+                  <h5>Tanggal Panen</h5>
+                  <p>{new Date(product.harvestDate).toLocaleDateString()}</p>
+
+                  <h5>Tanggal Kedaluwarsa</h5>
+                  <p>{new Date(product.expiryDate).toLocaleDateString()}</p>
+
+                  <h5>Asal Produk</h5>
+                  <p>{product.origin}</p>
+
+                  <h5>Ketersediaan</h5>
+                  <p>{product.availability ? 'Tersedia' : 'Tidak Tersedia'}</p>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
         ) : (
@@ -144,6 +156,7 @@ const DetailProduct = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
       <Footer />
     </>
   );

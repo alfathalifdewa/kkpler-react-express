@@ -3,7 +3,6 @@ import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap
 import api from '../../api';
 import Sidebar from '../../Components/Admin/Sidebar';
 
-
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -13,14 +12,17 @@ const ProductList = () => {
     id_category: '',
     image: null,
     desc: '',
-    indication: '',
-    composition: '',
-    dose: '',
-    howtouse: '',
-    effect: '-',
-    group: '',
-    nie: '',
+    calories: '',
+    protein: '',
+    carbohydrates: '',
+    fiber: '',
+    vitaminC: '',
+    harvestDate: '',
+    expiryDate: '',
+    origin: '',
     price: 0,
+    unit: '',
+    availability: true
   });
   const [categories, setCategories] = useState([]);
 
@@ -47,7 +49,6 @@ const ProductList = () => {
     }
   };
 
-  // Function to format price to IDR
   const formatIDR = (price) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -55,130 +56,116 @@ const ProductList = () => {
     }).format(price);
   };
 
-  // Modal handlers
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedProduct(null); // Reset selected product after modal close
+    setSelectedProduct(null);
     setNewProduct({
       productName: '',
       id_category: '',
       image: null,
       desc: '',
-      indication: '',
-      composition: '',
-      dose: '',
-      howtouse: '',
-      effect: '-',
-      group: '',
-      nie: '',
+      calories: '',
+      protein: '',
+      carbohydrates: '',
+      fiber: '',
+      vitaminC: '',
+      harvestDate: '',
+      expiryDate: '',
+      origin: '',
       price: 0,
+      unit: '',
+      availability: true
     });
   };
 
   const handleShowModal = (product) => {
     if (product) {
       setSelectedProduct(product);
-      setNewProduct({ ...product }); // Set newProduct state for editing existing product
+      setNewProduct({ ...product });
     } else {
       setNewProduct({
         productName: '',
         id_category: '',
         image: null,
         desc: '',
-        indication: '',
-        composition: '',
-        dose: '',
-        howtouse: '',
-        effect: '-',
-        group: '',
-        nie: '',
+        calories: '',
+        protein: '',
+        carbohydrates: '',
+        fiber: '',
+        vitaminC: '',
+        harvestDate: '',
+        expiryDate: '',
+        origin: '',
         price: 0,
+        unit: '',
+        availability: true
       });
     }
     setShowModal(true);
   };
 
-  // Form input change handler for new product
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'image') {
-      setNewProduct({ ...newProduct, [name]: e.target.files[0] });
-    } else {
-      setNewProduct({ ...newProduct, [name]: value });
-    }
+    setNewProduct(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  // Handle submission of new product
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('productName', newProduct.productName);
-    formData.append('id_category', newProduct.id_category);
-    formData.append('image', newProduct.image);
-    formData.append('desc', newProduct.desc);
-    formData.append('indication', newProduct.indication);
-    formData.append('composition', newProduct.composition);
-    formData.append('dose', newProduct.dose);
-    formData.append('howtouse', newProduct.howtouse);
-    formData.append('effect', newProduct.effect);
-    formData.append('group', newProduct.group);
-    formData.append('nie', newProduct.nie);
-    formData.append('price', newProduct.price);
+
+    Object.keys(newProduct).forEach(key => {
+      if (key === 'image' && newProduct[key]) {
+        formData.append(key, newProduct[key]);
+      } else if (newProduct[key] !== null && newProduct[key] !== undefined) {
+        formData.append(key, newProduct[key]);
+      }
+    });
 
     try {
       const response = await api.post('/products', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       console.log('New product added:', response.data);
-      fetchProducts(); // Fetch products again to update the list
-      handleCloseModal(); // Close the modal after successful submission
+      fetchProducts();
+      handleCloseModal();
     } catch (error) {
       console.error('Failed to add new product', error);
     }
   };
 
-  // Handle editing of product
   const handleEditProduct = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('productName', newProduct.productName);
-    formData.append('id_category', newProduct.id_category);
-    if (newProduct.image) {
-      formData.append('image', newProduct.image);
-    }
-    formData.append('desc', newProduct.desc);
-    formData.append('indication', newProduct.indication);
-    formData.append('composition', newProduct.composition);
-    formData.append('dose', newProduct.dose);
-    formData.append('howtouse', newProduct.howtouse);
-    formData.append('effect', newProduct.effect);
-    formData.append('group', newProduct.group);
-    formData.append('nie', newProduct.nie);
-    formData.append('price', newProduct.price);
+
+    Object.keys(newProduct).forEach(key => {
+      if (key === 'image' && newProduct[key]) {
+        formData.append(key, newProduct[key]);
+      } else if (newProduct[key] !== null && newProduct[key] !== undefined) {
+        formData.append(key, newProduct[key]);
+      }
+    });
 
     try {
       const response = await api.put(`/products/${selectedProduct._id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       console.log('Product updated:', response.data);
-      fetchProducts(); // Fetch products again to update the list
-      handleCloseModal(); // Close the modal after successful update
+      fetchProducts();
+      handleCloseModal();
     } catch (error) {
       console.error('Failed to update product', error);
     }
   };
 
-  // Handle deletion of product
   const handleDeleteProduct = async () => {
     try {
       const response = await api.delete(`/products/${selectedProduct._id}`);
       console.log('Product deleted:', response.data);
-      fetchProducts(); // Fetch products again to update the list
-      handleCloseModal(); // Close the modal after successful deletion
+      fetchProducts();
+      handleCloseModal();
     } catch (error) {
       console.error('Failed to delete product', error);
     }
@@ -200,9 +187,9 @@ const ProductList = () => {
               <th>#</th>
               <th>Image</th>
               <th>Name</th>
-              <th>Category</th>
               <th>Price (IDR)</th>
-              <th>Nomor Ijin Edar</th>
+              <th>Origin</th>
+              <th>Availability</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -219,9 +206,9 @@ const ProductList = () => {
                     )}
                   </td>
                   <td>{product.productName}</td>
-                  <td>{product.id_category}</td>
-                  <td>{formatIDR(product.price)}</td>
-                  <td>{product.nie || 'N/A'}</td>
+                  <td>{formatIDR(product.price)} / {product.unit}</td>
+                  <td>{product.origin}</td>
+                  <td>{product.availability ? 'Available' : 'Not Available'}</td>
                   <td>
                     <Button variant="outline-success" size="sm" onClick={() => handleShowModal(product)}>
                       View Detail
@@ -233,7 +220,6 @@ const ProductList = () => {
         </Table>
       </Container>
 
-      {/* Modal for viewing and editing product */}
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{selectedProduct ? 'Edit Product' : 'Add New Product'}</Modal.Title>
@@ -250,9 +236,10 @@ const ProductList = () => {
                     name="productName"
                     value={newProduct.productName}
                     onChange={handleInputChange}
-                    required
                   />
                 </Form.Group>
+              </Col>
+              <Col>
                 <Form.Group className="mb-3" controlId="formCategory">
                   <Form.Label>Category</Form.Label>
                   <Form.Control
@@ -260,79 +247,62 @@ const ProductList = () => {
                     name="id_category"
                     value={newProduct.id_category}
                     onChange={handleInputChange}
-                    required
                   >
                     <option value="">Select Category</option>
                     {categories.map((category) => (
-                      <option key={category.id_category} value={category.id_category}>
+                      <option key={category._id} value={category.id_category}>
                         {category.name_category}
                       </option>
                     ))}
                   </Form.Control>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formPrice">
-                  <Form.Label>Price (IDR)</Form.Label>
+              </Col>
+            </Row>
+            <Form.Group className="mb-3" controlId="formDesc">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="desc"
+                value={newProduct.desc}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formNutrition">
+              <Form.Label>Nutrition</Form.Label>
+              <Row>
+                {['calories', 'protein', 'carbohydrates', 'fiber', 'vitaminC'].map((field) => (
+                  <Col key={field}>
+                    <Form.Control
+                      type="text"
+                      placeholder={field}
+                      name={field}
+                      value={newProduct[field]}
+                      onChange={handleInputChange}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </Form.Group>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="formHarvestDate">
+                  <Form.Label>Harvest Date</Form.Label>
                   <Form.Control
-                    type="number"
-                    placeholder="Enter price"
-                    name="price"
-                    value={newProduct.price}
+                    type="date"
+                    name="harvestDate"
+                    value={newProduct.harvestDate}
                     onChange={handleInputChange}
-                    required
                   />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="formImage">
-                  <Form.Label>Product Image</Form.Label>
-                  {newProduct.image && newProduct.image instanceof File ? (
-                    <div>
-                      <img src={URL.createObjectURL(newProduct.image)} alt="Product Image" style={{ maxWidth: '200px' }} />
-                    </div>
-                  ) : newProduct.image ? (
-                    <div>
-                      <img src={newProduct.image} alt="Product Image" style={{ maxWidth: '200px' }} />
-                    </div>
-                  ) : (
-                    <div>No Image</div>
-                  )}
+                <Form.Group className="mb-3" controlId="formExpiryDate">
+                  <Form.Label>Expiry Date</Form.Label>
                   <Form.Control
-                    type="file"
-                    accept="image/jpeg, image/png"
-                    name="image"
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formIndication">
-                  <Form.Label>Indication</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter indication"
-                    name="indication"
-                    value={newProduct.indication}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formComposition">
-                  <Form.Label>Composition</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter composition"
-                    name="composition"
-                    value={newProduct.composition}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formDose">
-                  <Form.Label>Dose</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter dose"
-                    name="dose"
-                    value={newProduct.dose}
+                    type="date"
+                    name="expiryDate"
+                    value={newProduct.expiryDate}
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -340,75 +310,72 @@ const ProductList = () => {
             </Row>
             <Row>
               <Col>
-                <Form.Group className="mb-3" controlId="formHowToUse">
-                  <Form.Label>How to Use</Form.Label>
+                <Form.Group className="mb-3" controlId="formOrigin">
+                  <Form.Label>Origin</Form.Label>
                   <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter how to use"
-                    name="howtouse"
-                    value={newProduct.howtouse}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formEffect">
-                  <Form.Label>Effect</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter effect"
-                    name="effect"
-                    value={newProduct.effect}
+                    type="text"
+                    name="origin"
+                    value={newProduct.origin}
                     onChange={handleInputChange}
                   />
                 </Form.Group>
               </Col>
               <Col>
-                <Form.Group className="mb-3" controlId="formGroup">
-                  <Form.Label>Group</Form.Label>
+                <Form.Group className="mb-3" controlId="formPrice">
+                  <Form.Label>Price</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter group"
-                    name="group"
-                    value={newProduct.group}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formNie">
-                  <Form.Label>Nomor Ijin Edar (NIE)</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter NIE"
-                    name="nie"
-                    value={newProduct.nie}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formDesc">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter description"
-                    name="desc"
-                    value={newProduct.desc}
+                    type="number"
+                    name="price"
+                    value={newProduct.price}
                     onChange={handleInputChange}
                   />
                 </Form.Group>
               </Col>
             </Row>
-            <div className='d-flex gap-3'>
-            <Button variant="secondary" onClick={handleCloseModal}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
-              {selectedProduct ? 'Save Changes' : 'Add Product'}
-            </Button>
-            {selectedProduct && (
-              <Button variant="danger" onClick={handleDeleteProduct}>
-                Delete
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="formUnit">
+                  <Form.Label>Unit</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="unit"
+                    value={newProduct.unit}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mb-3" controlId="formAvailability">
+                  <Form.Check
+                    type="checkbox"
+                    label="Available"
+                    name="availability"
+                    checked={newProduct.availability}
+                    onChange={(e) => setNewProduct({ ...newProduct, availability: e.target.checked })}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Form.Group className="mb-3" controlId="formImage">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="file"
+                name="image"
+                onChange={(e) => setNewProduct({ ...newProduct, image: e.target.files[0] })}
+              />
+            </Form.Group>
+            <div className="d-flex justify-content-end">
+              <Button variant="secondary" onClick={handleCloseModal}>
+                Close
               </Button>
-            )}
+              <Button variant="primary" type="submit" className="ms-2">
+                {selectedProduct ? 'Update' : 'Add'}
+              </Button>
+              {selectedProduct && (
+                <Button variant="danger" onClick={handleDeleteProduct} className="ms-2">
+                  Delete
+                </Button>
+              )}
             </div>
           </Form>
         </Modal.Body>
