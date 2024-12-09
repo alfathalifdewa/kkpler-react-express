@@ -29,6 +29,7 @@ function Sidebar() {
         <Dropdown>
             <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
               Profile
+              <i class="fa-regular fa-user ms-2"></i>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to="/dashboard/my-profile">
@@ -49,21 +50,27 @@ function Sidebar() {
         </div>
         <Nav className="flex-column   gap-4">
           <Nav.Link as={Link} to="/dashboard" className="sidebar-link">
+            <i class="fa-solid fa-house me-2"></i>
             Dashboard
           </Nav.Link>
           <Nav.Link as={Link} to="/dashboard/user-list" className="sidebar-link">
+            <i class="fa-solid fa-users me-2"></i>
             User List
           </Nav.Link>
           <Nav.Link as={Link} to="/dashboard/product-list" className="sidebar-link">
+            <i class="fa-solid fa-seedling me-2"></i>
             Product List
           </Nav.Link>
           <Nav.Link as={Link} to="/dashboard/category-list" className="sidebar-link">
+            <i class="fa-solid fa-list me-2"></i>
             Category List
           </Nav.Link>
           <Nav.Link as={Link} to="/dashboard/order-list" className="sidebar-link">
+            <i class="fa-solid fa-bag-shopping me-2"></i>
             Order List
           </Nav.Link>
           <Nav.Link onClick={handleLogout} className="sidebar-link">
+            <i class="fa-solid fa-right-from-bracket me-2"></i>
             Logout
           </Nav.Link>
         </Nav>

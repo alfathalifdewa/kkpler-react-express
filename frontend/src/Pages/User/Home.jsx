@@ -205,7 +205,7 @@ const Home = () => {
                     <Card.Body className="d-flex flex-column justify-content-between">
                       <Card.Title className="product-name">{products[0].productName}</Card.Title>
                       <Card.Text className="product-price">{formatRupiah(products[0].price)}</Card.Text>
-                      <Button variant="outline-primary" className="pe-3 ps-3">Detail</Button>
+                      <Button variant="outline-success" className="pe-3 ps-3">Detail</Button>
                     </Card.Body>
                   </Card>
                 </Col>

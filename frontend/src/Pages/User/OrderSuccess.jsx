@@ -23,7 +23,7 @@ const OrderSuccess = () => {
             Confirm on WhatsApp
           </Button>
         )}
-        <Button variant="primary" onClick={() => navigate('/')}>
+        <Button variant="success" onClick={() => navigate('/')}>
           Back to Home
         </Button>
       </Alert>

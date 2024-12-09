@@ -104,6 +104,7 @@ const Header = () => {
                 <Dropdown align="end">
                   <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
                     Pengguna
+                    <i class="fa-regular fa-user ms-2"></i>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
                     <Dropdown.Item as={Link} to="/user-profile">
@@ -122,7 +123,11 @@ const Header = () => {
                     <Button variant="success">Masuk</Button>
                   </ButtonGroup>
                   <ButtonGroup as={Link} to="/register">
-                    <Button variant="outline-success">Daftar</Button>
+                    <Button variant="outline-success">
+                    <i class="fa-solid fa-user-plus me-2"></i>
+                    Daftar
+                    </Button>
+                    
                   </ButtonGroup>
                 </>
               )}

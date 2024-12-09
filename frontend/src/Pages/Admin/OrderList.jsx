@@ -88,7 +88,7 @@ const OrderListPage = () => {
                   <td>{order.status}</td>
                   <td>
                     <Button
-                      variant="info"
+                      variant="success"
                       size="sm"
                       onClick={() => handleShowModal(order)}
                     >

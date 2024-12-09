@@ -160,12 +160,16 @@ const CategoryList = () => {
                 onChange={handleInputChange}
                 required
               >
-                <option value="💊">💊</option>
-                <option value="💉">💉</option>
-                <option value="🦠">🦠</option>
-                <option value="🌡">🌡</option>
-                <option value="🩸">🩸</option>
-                <option value="🩹">🩹</option>
+                <option value="🥦">🥦</option>
+                <option value="🍉">🍉</option>
+                <option value="🥩">🥩</option>
+                <option value=""></option>
+                <option value="🧂">🧂</option>
+                <option value="❄️">❄️</option>
+
+
+
+
               </Form.Control>
             </Form.Group>
             <div className='d-flex gap-3'>
