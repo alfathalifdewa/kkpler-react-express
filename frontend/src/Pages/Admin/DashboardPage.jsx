@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import Sidebar from "../../Components/Admin/Sidebar";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const DashboardPage = () => {
   const [users, setUsers] = useState([]);
@@ -37,16 +41,115 @@ const DashboardPage = () => {
   const fetchOrders = async () => {
     try {
       const response = await api.get("/order/all");
-      setOrders(response.data.slice(0, 3));
+      setOrders(response.data);
     } catch (error) {
       console.error("Failed to fetch orders", error);
     }
+  };
+
+  // Process data for Daily Revenue
+  const processDailyRevenueData = () => {
+    const revenueByDate = orders.reduce((acc, order) => {
+      const date = new Date(order.createdAt).toISOString().split("T")[0];
+      if (!acc[date]) acc[date] = 0;
+      acc[date] += order.total;
+      return acc;
+    }, {});
+
+    const labels = Object.keys(revenueByDate).sort();
+    const data = labels.map((date) => revenueByDate[date]);
+    return { labels, data };
+  };
+
+  // Process data for Order Status
+  const processOrderStatusData = () => {
+    const statuses = ["Successful", "Pending", "Cancelled"];
+    const statusData = statuses.map(
+      (status) => orders.filter((order) => order.status === status).length
+    );
+    return { statuses, statusData };
+  };
+
+  const { labels: revenueLabels, data: revenueData } = processDailyRevenueData();
+  const { statuses, statusData } = processOrderStatusData();
+
+  // Chart configurations
+  const revenueChartConfig = {
+    data: {
+      labels: revenueLabels,
+      datasets: [
+        {
+          label: "Revenue per Day (Rp)",
+          data: revenueData,
+          backgroundColor: "#36A2EB",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "top" },
+        title: { display: true, text: "Daily Revenue Report" },
+      },
+    },
+  };
+
+  const statusChartConfig = {
+    data: {
+      labels: statuses,
+      datasets: [
+        {
+          label: "Order Status Count",
+          data: statusData,
+          backgroundColor: ["#4CAF50", "#FFC107", "#F44336"],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: "top" },
+        title: { display: true, text: "Order Status Breakdown" },
+      },
+    },
   };
 
   return (
     <div className="dashboard-container">
       <Sidebar />
       <Container className="dashboard-content mt-5">
+        <Row>
+          <Col md={6}>
+            <Card>
+              <Card.Header className="fw-bold">Daily Revenue Report</Card.Header>
+              <Card.Body>
+                <Bar data={revenueChartConfig.data} options={revenueChartConfig.options} />
+                <Button
+                  variant="primary"
+                  className="mt-3"
+                  onClick={() => navigate("/dashboard/order-list")}
+                >
+                  Show Detail
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={6}>
+            <Card>
+              <Card.Header className="fw-bold">Order Status Breakdown</Card.Header>
+              <Card.Body>
+                <Bar data={statusChartConfig.data} options={statusChartConfig.options} />
+                <Button
+                  variant="primary"
+                  className="mt-3"
+                  onClick={() => navigate("/dashboard/order-list")}
+                >
+                  Show Detail
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
         <Row>
           <Col md={4}>
             <Card className="bg-info text-white">
@@ -86,13 +189,13 @@ const DashboardPage = () => {
             </Card>
           </Col>
           <Col md={4}>
-            <Card className="bg-success text-white  mt-lg-0 mt-4">
+            <Card className="bg-success text-white mt-lg-0 mt-4">
               <Card.Header className="fw-bold">Order List</Card.Header>
               <Card.Body>
-                {orders.map((order) => (
+                {orders.slice(0, 3).map((order) => (
                   <div key={order._id}>
-                    <p>{order.createdAt}</p>
-                    <p>{order.total}</p>
+                    <p>{new Date(order.createdAt).toLocaleDateString()}</p>
+                    <p>Rp {order.total.toLocaleString()}</p>
                   </div>
                 ))}
                 <Button
