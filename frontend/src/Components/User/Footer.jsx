@@ -75,8 +75,8 @@ const Footer = () => {
               </Link>
             </p>
             <p>
-              <Link as={Link} to="/diagnosis" className="text-reset">
-                Diagnosis
+              <Link as={Link} to="/products" className="text-reset">
+                Produk
               </Link>
             </p>
           </Col>
