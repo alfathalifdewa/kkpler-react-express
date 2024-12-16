@@ -51,7 +51,7 @@ const About = () => {
                     Solusi Terbaik Untuk Kebutuhan Kesehatan Anda
                   </h1>
                   <h4 className="mb-3 animate__animated animate__bounceInRight animate__delay-1s">
-                    Sayurku.id adalah Toko Sayur online untuk solusi kesehatan yang
+                    VegeSale adalah Toko Sayur online untuk solusi kesehatan yang
                     modern dan terpercaya.
                   </h4>
                 </Col>
@@ -73,7 +73,7 @@ const About = () => {
                     Tentang Kami
                   </h3>
                   <p className="lead fs-4 mb-3">
-                  Sayurku.id adalah toko sayur online yang modern dan terpercaya, 
+                  VegeSale adalah toko sayur online yang modern dan terpercaya, 
                   menyediakan beragam sayur segar berkualitas tinggi dengan layanan yang ramah 
                   pengguna untuk memenuhi kebutuhan dapur Anda setiap hari.
                   </p>

@@ -116,9 +116,10 @@ const DashboardPage = () => {
     <div className="dashboard-container">
       <Sidebar />
       <Container className="dashboard-content mt-5">
+      <h2 className="fw-bold text-success">Hi, Admin</h2>
         <Row className="py-4">
         <Col md={4}>
-            <Card className="bg-info text-white">
+            <Card className="bg-info text-white shadow">
               <Card.Header className="fw-bold">User List</Card.Header>
               <Card.Body>
                 <div className="d-flex align-items-center justify-content-between">
@@ -137,7 +138,7 @@ const DashboardPage = () => {
           </Col>
 
           <Col md={4}>
-            <Card className="bg-warning text-white mt-lg-0 mt-4">
+            <Card className="bg-warning text-white mt-lg-0 mt-4 shadow">
               <Card.Header className="fw-bold">Product List</Card.Header>
               <Card.Body>
                 <div className="d-flex align-items-center justify-content-between">
@@ -156,7 +157,7 @@ const DashboardPage = () => {
             </Card>
           </Col>
           <Col md={4}>
-            <Card className="bg-success text-white mt-lg-0 mt-4">
+            <Card className="bg-success text-white mt-lg-0 mt-4 shadow">
               <Card.Header className="fw-bold">Order List</Card.Header>
               <Card.Body>
                 <div className="d-flex align-items-center justify-content-between">
@@ -177,7 +178,7 @@ const DashboardPage = () => {
         </Row>
         <Row className="py-4">
           <Col md={6}>
-            <Card>
+            <Card className="shadow">
               <Card.Header className="fw-bold">Daily Revenue Report</Card.Header>
               <Card.Body>
                 <Bar data={revenueChartConfig.data} options={revenueChartConfig.options} />
@@ -192,7 +193,7 @@ const DashboardPage = () => {
             </Card>
           </Col>
           <Col md={6}>
-            <Card>
+            <Card className="shadow">
               <Card.Header className="fw-bold">Order Status Breakdown</Card.Header>
               <Card.Body>
                 <Bar data={statusChartConfig.data} options={statusChartConfig.options} />

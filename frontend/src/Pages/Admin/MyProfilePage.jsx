@@ -152,7 +152,7 @@ function MyProfilePage() {
                   </Button>
                 </div>
               ) : (
-                <Button variant="primary" onClick={() => setEditMode(true)}>
+                <Button variant="success" className="w-25" onClick={() => setEditMode(true)}>
                   Edit
                 </Button>
               )}

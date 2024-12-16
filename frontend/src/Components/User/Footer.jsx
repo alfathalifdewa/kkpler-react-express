@@ -51,9 +51,9 @@ const Footer = () => {
         </section>
         <Row className="mt-5 mb-5">
           <Col md="3" lg="4" xl="3" className="mx-auto mb-4 ">
-            <h6 className="text-uppercase fw-bold mb-4">SAYURKU.ID</h6>
+            <h6 className="text-uppercase fw-bold mb-4">VEGESALE</h6>
             <p>
-              Sayurku.id adalah Toko Sayur online untuk solusi kenutuhan sayur anda di setiap hari.
+              VegeSale adalah Toko Sayur online untuk solusi kenutuhan sayur anda di setiap hari.
             </p>
           </Col>
 
@@ -89,7 +89,7 @@ const Footer = () => {
             </p>
             <p>
               <Envelope color="white" className="me-3" />
-              sayurku.id@help.com
+              vegesale@help.com
             </p>
             <p>
               <Telephone color="white" className="me-3" />
@@ -147,7 +147,7 @@ const Footer = () => {
       <div className="text-center p-4 border-top">
         © 2024 Copyright:
         <Link as={Link} to="/" className="text-reset fw-bold ms-2">
-          Sayurku.id
+          VegeSale
         </Link>
       </div>
     </footer>

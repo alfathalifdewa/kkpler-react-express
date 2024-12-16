@@ -89,13 +89,13 @@ const CategoryList = () => {
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Category List</h3>
           <Button variant="success" onClick={() => handleShowModal(null)}>
-            Add Category
+          <i class="fa-solid fa-plus me-2"></i> Add Category
           </Button>
         </div>
-        <Table striped bordered hover className="mt-3">
+        <Table striped bordered hover className="my-4">
           <thead>
             <tr>
-              <th>#</th>
+              <th>No</th>
               <th>ID Category</th>
               <th>Name Category</th>
               <th>Icon</th>
@@ -110,11 +110,11 @@ const CategoryList = () => {
                 <td>{category.name_category}</td>
                 <td>{category.icon}</td>
                 <td>
-                  <Button variant="info" size="sm" onClick={() => handleShowModal(category)}>
-                    Edit
+                  <Button variant="info" className='me-2' size="sm" onClick={() => handleShowModal(category)}>
+                  <i class="fa-solid fa-pen-to-square me-2"></i> Edit
                   </Button>{' '}
                   <Button variant="danger" size="sm" onClick={() => handleDeleteCategory(category._id)}>
-                    Delete
+                  <i class="fa-solid fa-trash me-2"></i> Delete
                   </Button>
                 </td>
               </tr>

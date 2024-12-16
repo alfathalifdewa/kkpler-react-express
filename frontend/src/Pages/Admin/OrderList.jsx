@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Table, Button, Modal,} from 'react-bootstrap';
 import api from '../../api';
 import Sidebar from '../../Components/Admin/Sidebar';
+import * as XLSX from "xlsx";
+
+
 
 const OrderListPage = () => {
   const [orders, setOrders] = useState([]);
@@ -56,17 +59,42 @@ const OrderListPage = () => {
     }
   };
 
+  const handleExportToExcel = () => {
+    // Data yang akan diekspor ke Excel
+    const exportData = orders.map((order, index) => ({
+      "#": index + 1,
+      "Order Date": new Date(order.createdAt).toLocaleDateString(),
+      "Total Amount (IDR)": new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+      }).format(order.total),
+      Status: order.status,
+    }));
+  
+    // Membuat worksheet dan workbook
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Order List");
+  
+    // Menggunakan XLSX.writeFile untuk menyimpan file
+    XLSX.writeFile(workbook, "Order_List.xlsx");
+  };
+  
+
   return (
     <>
       <Sidebar />
       <Container>
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Order List</h3>
+          <Button variant="success" onClick={handleExportToExcel}>
+          <i class="fa-solid fa-file-export me-2"></i> Export to Excel
+          </Button>
         </div>
-        <Table striped bordered hover className="mt-3">
+        <Table striped bordered hover className="my-4">
           <thead>
             <tr>
-              <th>#</th>
+              <th>No</th>
               <th>Order Date</th>
               <th>Total Amount (IDR)</th>
               <th>Status</th>
@@ -88,11 +116,11 @@ const OrderListPage = () => {
                   <td>{order.status}</td>
                   <td>
                     <Button
-                      variant="success"
+                      variant="outline-success"
                       size="sm"
                       onClick={() => handleShowModal(order)}
                     >
-                      View Order
+                       <i class="fa-solid fa-eye me-2"></i>View Order
                     </Button>{' '}
                     {/* <Button
                       variant="success"

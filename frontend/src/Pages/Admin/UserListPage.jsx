@@ -46,11 +46,11 @@ function UserList() {
     <>
       <Sidebar />
       <Container>
-        <h2 className="text-center p-5 m-5">User List</h2>
-        <Table striped bordered hover>
+        <h2 className="pt-5">User List</h2>
+        <Table striped bordered hover className="my-4">
           <thead>
             <tr>
-              <th>#</th>
+              <th>No</th>
               <th>Username</th>
               <th>Email</th>
               <th>Phone</th>
@@ -69,8 +69,10 @@ function UserList() {
                 <td>{user.role}</td>
                 <td>{user.address}</td>
                 <td>
-                  <Button variant="info" size="sm" onClick={() => handleEdit(user)}>Edit Role</Button>{" "}
-                  <Button variant="danger" size="sm">Delete</Button>
+                  <Button variant="info" className="me-2" size="sm" onClick={() => handleEdit(user)}>
+                  <i class="fa-solid fa-pen-to-square me-2"></i>Edit Role</Button>{" "}
+                  <Button variant="danger" size="sm">
+                  <i class="fa-solid fa-trash me-2"></i>Delete</Button>
                 </td>
               </tr>
             ))}

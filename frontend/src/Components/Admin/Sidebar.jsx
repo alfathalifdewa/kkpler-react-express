@@ -23,8 +23,8 @@ function Sidebar() {
         <button className="menu-toggle" onClick={toggleSidebar}>
           ☰
         </button>
-        <h1 className="fw-bold">
-          Sayurku<span className="text-success">.id</span>
+        <h1 className="fw-bold text-success">
+          Vege<span className="text-secondary">Sale</span>
         </h1>
         <Dropdown>
             <Dropdown.Toggle variant="outline-success" id="dropdown-basic">

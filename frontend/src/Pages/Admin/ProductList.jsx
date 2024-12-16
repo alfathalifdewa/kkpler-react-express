@@ -178,13 +178,13 @@ const ProductList = () => {
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Product List</h3>
           <Button variant="success" onClick={() => handleShowModal(null)}>
-            Tambah Data
+          <i class="fa-solid fa-plus me-2"></i>Tambah Data
           </Button>
         </div>
         <Table striped bordered hover className="mt-3">
           <thead>
             <tr>
-              <th>#</th>
+              <th>No</th>
               <th>Image</th>
               <th>Name</th>
               <th>Price (IDR)</th>
@@ -211,7 +211,7 @@ const ProductList = () => {
                   <td>{product.availability ? 'Available' : 'Not Available'}</td>
                   <td>
                     <Button variant="outline-success" size="sm" onClick={() => handleShowModal(product)}>
-                      View Detail
+                    <i class="fa-solid fa-eye me-2"></i>View Detail
                     </Button>
                   </td>
                 </tr>

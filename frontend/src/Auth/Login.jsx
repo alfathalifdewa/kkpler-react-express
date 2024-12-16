@@ -43,7 +43,7 @@ const Login = () => {
     <Container className="login-container">
       <Container as={Link} to="/">
         <h1 className="fw-bold text-center fs-1 text-success">
-          Sayurku<span className='text-secondary'>.id</span>
+          Vege<span className='text-secondary'>Sale</span>
         </h1>
       </Container>
 

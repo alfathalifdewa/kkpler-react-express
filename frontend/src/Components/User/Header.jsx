@@ -9,7 +9,7 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/img/logo1.jpeg";
+import logo from "../../assets/img/vegesalelogo.jpeg";
 import "../../assets/css/Header.css";
 
 const Header = () => {

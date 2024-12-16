@@ -147,7 +147,7 @@ const Contact = () => {
                           <h4 className="mb-2">Email</h4>
                           <hr className="w-50 my-3 border-dark-subtle" />
                           <p className="mb-0 text-secondary">
-                            sayurku.id@help.com
+                            vegesale@help.com
                           </p>
                         </div>
                       </div>
@@ -161,9 +161,9 @@ const Contact = () => {
                       <h4 className="mb-2">Jam Kerja</h4>
                       <hr className="w-50 my-3 border-dark-subtle" />
                       <p className="mb-2 text-secondary">
-                        Sen - Jum: 9:00 - 17:00
+                        Sen - Jum: 6:00 - 17:00
                       </p>
-                      <p className="m-0 text-secondary">Sab - Min: Tutup</p>
+                      <p className="m-0 text-secondary"> Sab - Min: 6:00 - 13:00</p>
                     </div>
                   </div>
                 </Col>
