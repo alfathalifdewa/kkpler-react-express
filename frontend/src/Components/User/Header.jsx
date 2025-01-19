@@ -28,6 +28,8 @@ const Header = () => {
     navigate("/logout");
   };
 
+  const isProductsActive = location.pathname.startsWith("/products");
+
   return (
     <>
       <Navbar expand="lg" className="navbar-container" sticky="top">
@@ -74,9 +76,7 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/products"
-                  className={`nav-link ${
-                    location.pathname === "/products" ? "active" : ""
-                  }`}
+                  className={`nav-link ${isProductsActive ? "active" : ""}`}
                 >
                   Produk
                 </Nav.Link>

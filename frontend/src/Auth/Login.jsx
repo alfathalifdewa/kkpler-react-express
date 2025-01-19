@@ -23,8 +23,10 @@ const Login = () => {
       if (response.status === 200) {
         const userData = response.data; // Assuming API returns user data with role and token
         const token = userData.token;
+        const timestamp = new Date().getTime(); // Current time in milliseconds
         localStorage.setItem('authToken', token);
         localStorage.setItem('userData', JSON.stringify(userData.user));
+        localStorage.setItem('tokenTimestamp', timestamp); // Save the token creation time
         api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         if (userData.user.role === 'Admin' || userData.user.role === 'Superadmin') {
           navigate('/dashboard');
@@ -37,7 +39,7 @@ const Login = () => {
     } catch (error) {
       setError(error.response?.data?.message || 'Login failed');
     }
-  };
+  };  
 
   return (
     <Container className="login-container">

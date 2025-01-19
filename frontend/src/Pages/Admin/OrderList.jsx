@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Modal,} from 'react-bootstrap';
+import { Container, Table, Button, Modal, Pagination } from 'react-bootstrap';
 import api from '../../api';
 import Sidebar from '../../Components/Admin/Sidebar';
 import * as XLSX from "xlsx";
 
-
-
 const OrderListPage = () => {
   const [orders, setOrders] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage] = useState(10); // Jumlah item per halaman
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -34,11 +34,6 @@ const OrderListPage = () => {
     setShowModal(true);
   };
 
-  const handlePrintOrder = (orderId) => {
-    // Implement print logic here
-    console.log('Printing order:', orderId);
-  };
-
   const handleUpdateStatus = async (status) => {
     try {
       const token = localStorage.getItem('authToken');
@@ -60,7 +55,6 @@ const OrderListPage = () => {
   };
 
   const handleExportToExcel = () => {
-    // Data yang akan diekspor ke Excel
     const exportData = orders.map((order, index) => ({
       "#": index + 1,
       "Order Date": new Date(order.createdAt).toLocaleDateString(),
@@ -70,16 +64,24 @@ const OrderListPage = () => {
       }).format(order.total),
       Status: order.status,
     }));
-  
-    // Membuat worksheet dan workbook
+
     const worksheet = XLSX.utils.json_to_sheet(exportData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Order List");
-  
-    // Menggunakan XLSX.writeFile untuk menyimpan file
+
     XLSX.writeFile(workbook, "Order_List.xlsx");
   };
-  
+
+  // Logic for displaying current orders
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  const totalPages = Math.ceil(orders.length / ordersPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -88,7 +90,7 @@ const OrderListPage = () => {
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Order List</h3>
           <Button variant="success" onClick={handleExportToExcel}>
-          <i class="fa-solid fa-file-export me-2"></i> Export to Excel
+            <i className="fa-solid fa-file-export me-2"></i> Export to Excel
           </Button>
         </div>
         <Table striped bordered hover className="my-4">
@@ -102,38 +104,43 @@ const OrderListPage = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(orders) &&
-              orders.map((order, index) => (
-                <tr key={order._id}>
-                  <td>{index + 1}</td>
-                  <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                  <td>
-                    {new Intl.NumberFormat('id-ID', {
-                      style: 'currency',
-                      currency: 'IDR',
-                    }).format(order.total)}
-                  </td>
-                  <td>{order.status}</td>
-                  <td>
-                    <Button
-                      variant="outline-success"
-                      size="sm"
-                      onClick={() => handleShowModal(order)}
-                    >
-                       <i class="fa-solid fa-eye me-2"></i>View Order
-                    </Button>{' '}
-                    {/* <Button
-                      variant="success"
-                      size="sm"
-                      onClick={() => handlePrintOrder(order._id)}
-                    >
-                      Print Order
-                    </Button> */}
-                  </td>
-                </tr>
-              ))}
+            {currentOrders.map((order, index) => (
+              <tr key={order._id}>
+                <td>{indexOfFirstOrder + index + 1}</td>
+                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                <td>
+                  {new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                  }).format(order.total)}
+                </td>
+                <td>{order.status}</td>
+                <td>
+                  <Button
+                    variant="outline-success"
+                    size="sm"
+                    onClick={() => handleShowModal(order)}
+                  >
+                    <i className="fa-solid fa-eye me-2"></i>View Order
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
+
+        {/* Pagination */}
+        <Pagination className="justify-content-center">
+          {[...Array(totalPages)].map((_, index) => (
+            <Pagination.Item
+              key={index + 1}
+              active={index + 1 === currentPage}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+        </Pagination>
       </Container>
 
       {/* Modal for viewing order details */}

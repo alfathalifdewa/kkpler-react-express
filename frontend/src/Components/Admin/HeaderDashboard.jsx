@@ -12,7 +12,7 @@ function HeaderDashboard() {
   };
 
   return (
-    <Navbar expand="lg" className="mb-3 navbar-container" sticky="top">
+    <Navbar expand="lg" className="mb-3 navbar-container" fixed="top">
       <Container fluid>
         <Navbar.Toggle aria-controls={`offcanvasNavbarLabel-expand-lg`} />
         <Navbar.Brand as={Link} to="/dashboard" className="d-flex align-items-center">

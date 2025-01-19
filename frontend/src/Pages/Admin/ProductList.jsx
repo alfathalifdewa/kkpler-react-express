@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Modal, Form, Row, Col } from 'react-bootstrap';
+import { Container, Table, Button, Modal, Form, Row, Col, Pagination } from 'react-bootstrap';
 import api from '../../api';
 import Sidebar from '../../Components/Admin/Sidebar';
 
@@ -25,6 +25,8 @@ const ProductList = () => {
     availability: true
   });
   const [categories, setCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Jumlah item per halaman
 
   useEffect(() => {
     fetchProducts();
@@ -171,6 +173,17 @@ const ProductList = () => {
     }
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Get current items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
   return (
     <>
       <Sidebar />
@@ -178,7 +191,7 @@ const ProductList = () => {
         <div className="d-flex justify-content-between align-items-center mt-5">
           <h3>Product List</h3>
           <Button variant="success" onClick={() => handleShowModal(null)}>
-          <i class="fa-solid fa-plus me-2"></i>Tambah Data
+            <i className="fa-solid fa-plus me-2"></i>Tambah Data
           </Button>
         </div>
         <Table striped bordered hover className="mt-3">
@@ -194,10 +207,10 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(products) &&
-              products.map((product, index) => (
+            {Array.isArray(currentProducts) &&
+              currentProducts.map((product, index) => (
                 <tr key={product._id}>
-                  <td>{index + 1}</td>
+                  <td>{indexOfFirstItem + index + 1}</td>
                   <td>
                     {product.image ? (
                       <img src={product.image} alt={product.productName} style={{ maxWidth: '100px' }} />
@@ -211,13 +224,24 @@ const ProductList = () => {
                   <td>{product.availability ? 'Available' : 'Not Available'}</td>
                   <td>
                     <Button variant="outline-success" size="sm" onClick={() => handleShowModal(product)}>
-                    <i class="fa-solid fa-eye me-2"></i>View Detail
+                      <i className="fa-solid fa-eye me-2"></i>View Detail
                     </Button>
                   </td>
                 </tr>
               ))}
           </tbody>
         </Table>
+        <Pagination className="justify-content-center">
+          {[...Array(totalPages)].map((_, index) => (
+            <Pagination.Item
+              key={index}
+              active={index + 1 === currentPage}
+              onClick={() => handlePageChange(index + 1)}
+            >
+              {index + 1}
+            </Pagination.Item>
+          ))}
+        </Pagination>
       </Container>
 
       <Modal show={showModal} onHide={handleCloseModal} size="lg">

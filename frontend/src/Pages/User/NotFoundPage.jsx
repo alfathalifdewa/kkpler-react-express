@@ -9,7 +9,6 @@ import "../../assets/css/NotFoundPage.css";
 const NotFoundPage = () => {
   return (
     <>
-    <Header/>
       <Container className="text-center not-found-page">
         <Row>
           <Col>
@@ -24,7 +23,6 @@ const NotFoundPage = () => {
           </Col>
         </Row>
       </Container>
-      <Footer/>
     </>
   );
 };
